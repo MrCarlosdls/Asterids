@@ -6,9 +6,14 @@
 // C++ STL
 #include <cassert>
 #include <iostream>
-
-// 
+#include <string>
+#include "fstream"
+#include "Source.h"
 #include "App.hpp"
+ 
+
+
+using namespace std;
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;

@@ -109,7 +109,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;C:\Users\cespe\Documents\GitHub\dirent\include;..\Externals\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -179,8 +179,16 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="SDLEvent.hpp" />
+    <ClInclude Include="Source.h" />
     <ClInclude Include="TimeManager.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\enterprise.points" />
+    <None Include="Models\falcon.points" />
+    <None Include="Models\pa_ass2.md" />
+    <None Include="Models\ship.points" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

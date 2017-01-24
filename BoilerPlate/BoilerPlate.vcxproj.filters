@@ -11,6 +11,12 @@
     <ClInclude Include="App.hpp" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
+    <ClInclude Include="dirent.h">
+      <Filter>Engine\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Engine\Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -22,5 +28,22 @@
     <Filter Include="Engine\Header files">
       <UniqueIdentifier>{da8cc683-e66e-46b9-be58-7d0e16e23f76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{09f19219-6f47-47dd-a168-a4c4a00e4a86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\enterprise.points">
+      <Filter>Models</Filter>
+    </None>
+    <None Include="Models\falcon.points">
+      <Filter>Models</Filter>
+    </None>
+    <None Include="Models\pa_ass2.md">
+      <Filter>Models</Filter>
+    </None>
+    <None Include="Models\ship.points">
+      <Filter>Models</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -115,7 +115,7 @@ namespace Engine
 			endTime = m_timer->GetElapsedTimeInSeconds();
 		}
 
-		//double elapsedTime = endTime - startTime;        
+		//double elapsedTime = endTime - startTime;
 
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 
@@ -128,11 +128,10 @@ namespace Engine
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glBegin(GL_TRIANGLES);
-		glVertex2f(50.0f, 0.0f);
-		glVertex2f(50.0f, -50.0f);
-		glVertex2f(0.0f, -50.0f);
+		glVertex2f(250.0f, 0.0f);
+		glVertex2f(252.0f, -250.0f);
+		glVertex2f(0.0f, -250.0f);
 		
-
 		glEnd();
 
 		SDL_GL_SwapWindow(m_mainWindow);
@@ -151,8 +150,8 @@ namespace Engine
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-		Uint32 flags =  SDL_WINDOW_OPENGL     | 
-						SDL_WINDOW_SHOWN      | 
+		Uint32 flags =  SDL_WINDOW_OPENGL     |
+						SDL_WINDOW_SHOWN      |
 						SDL_WINDOW_RESIZABLE;
 
 		m_mainWindow = SDL_CreateWindow(
