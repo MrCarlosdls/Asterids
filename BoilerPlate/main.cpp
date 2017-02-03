@@ -10,16 +10,19 @@
 #include "fstream"
 #include "Source.h"
 #include "App.hpp"
+#include "windows.h"
+#include "leerModels.h"
  
-
-
-using namespace std;
+//using namespace std;
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
 
 int main(int argc, char* argv[])
 {
+	//init();
+	//leerenterprise();
+
 #if _MSC_VER && _DEBUG
 	// https://msdn.microsoft.com/en-us/library/x98tx3cf.aspx
 	// This will help you detect leaks when using Visual C++
@@ -27,6 +30,9 @@ int main(int argc, char* argv[])
 	assert(_CrtCheckMemory());
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
+	//
+	utilities DIR;
+	DIR.ListFile("models");
 
 	// Create Game Object
 	//

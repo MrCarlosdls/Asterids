@@ -6,6 +6,7 @@
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="stb_image.c" />
+    <ClCompile Include="leerModels.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -17,6 +18,7 @@
     <ClInclude Include="Source.h">
       <Filter>Engine\Header files</Filter>
     </ClInclude>
+    <ClInclude Include="leerModels.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -28,22 +30,22 @@
     <Filter Include="Engine\Header files">
       <UniqueIdentifier>{da8cc683-e66e-46b9-be58-7d0e16e23f76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models">
+    <Filter Include="models">
       <UniqueIdentifier>{09f19219-6f47-47dd-a168-a4c4a00e4a86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\enterprise.points">
-      <Filter>Models</Filter>
+      <Filter>models</Filter>
     </None>
     <None Include="Models\falcon.points">
-      <Filter>Models</Filter>
+      <Filter>models</Filter>
     </None>
     <None Include="Models\pa_ass2.md">
-      <Filter>Models</Filter>
+      <Filter>models</Filter>
     </None>
     <None Include="Models\ship.points">
-      <Filter>Models</Filter>
+      <Filter>models</Filter>
     </None>
   </ItemGroup>
 </Project>

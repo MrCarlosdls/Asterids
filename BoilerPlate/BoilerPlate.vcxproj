@@ -119,7 +119,8 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)\Externals\glew-1.13.0\bin\Release\x64\glew32.dll" "$(TargetDir)glew32.dll"
-copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"</Command>
+copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"
+copy /Y "$(SolutionDir)\BoilerPlate\models\" "$(TargetDir)\models"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -172,6 +173,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="leerModels.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="stb_image.c" />
@@ -180,6 +182,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="dirent.h" />
+    <ClInclude Include="leerModels.h" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="TimeManager.hpp" />

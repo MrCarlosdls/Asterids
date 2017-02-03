@@ -128,9 +128,9 @@ namespace Engine
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glBegin(GL_TRIANGLES);
-		glVertex2f(250.0f, 0.0f);
-		glVertex2f(252.0f, -250.0f);
-		glVertex2f(0.0f, -250.0f);
+		glVertex2f(50.0f, 0.0f);
+		glVertex2f(50.0f, -50.0f);
+		glVertex2f(0.0f, -50.0f);
 		
 		glEnd();
 
