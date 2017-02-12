@@ -173,18 +173,26 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="config.cpp" />
+    <ClCompile Include="drawable.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="leerModels.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
+    <ClCompile Include="ship.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="vectors.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="dirent.h" />
+    <ClInclude Include="drawable.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="leerModels.h" />
     <ClInclude Include="SDLEvent.hpp" />
+    <ClInclude Include="ship.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="vectors.h" />

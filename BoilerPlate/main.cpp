@@ -20,9 +20,6 @@ const int HEIGHT = 640;
 
 int main(int argc, char* argv[])
 {
-	//init();
-	//leerenterprise();
-
 #if _MSC_VER && _DEBUG
 	// https://msdn.microsoft.com/en-us/library/x98tx3cf.aspx
 	// This will help you detect leaks when using Visual C++
@@ -32,8 +29,8 @@ int main(int argc, char* argv[])
 #endif
 
     //Leeyendo carpeta models
-	utilities DIR;
-	DIR.ListFile("models");
+	//utilities DIR;
+	//DIR.ListFile("models");
 
 	// Create Game Object
 	//

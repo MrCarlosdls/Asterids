@@ -6,6 +6,13 @@
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "config.h"
+
+using namespace std;
+
 namespace Engine
 {
 	const float DESIRED_FRAME_RATE = 60.0f;
@@ -18,6 +25,7 @@ namespace Engine
 		, m_nUpdates(0)
 		, m_timer(new TimeManager)
 		, m_mainWindow(nullptr)
+		, m_currentIndex(0)
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
@@ -25,6 +33,14 @@ namespace Engine
 
 	App::~App()
 	{
+
+		for(auto entity : m_entities)
+		{
+			delete entity;
+		}
+
+		m_entities.clear();
+
 		CleanupSDL();
 	}
 
@@ -73,6 +89,9 @@ namespace Engine
 		//
 		m_state = GameState::INIT_SUCCESSFUL;
 
+		Asteroids::utilities::Configuration config;
+		m_entities = config.LoadModels();
+
 		return true;
 	}
 
@@ -80,8 +99,25 @@ namespace Engine
 	{		
 		switch (keyBoardEvent.keysym.scancode)
 		{
+		case SDL_SCANCODE_W:
+			cout << "You are pressing W";
+			//m_entities[m_currentIndex]->MoveUp();
+			break;
+		case SDL_SCANCODE_A:
+			cout << "You are pressing A";
+			break;
+		case SDL_SCANCODE_S:
+			cout << "You are pressing S";
+			break;
+		case SDL_SCANCODE_D:
+			cout << "You are pressing D";
+			break;
+
 		default:			
-			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
+			//SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
+			    SDL_Log("Physical %s key acting as %s key",
+				SDL_GetScancodeName(keyBoardEvent.keysym.scancode),
+				SDL_GetKeyName(keyBoardEvent.keysym.sym));
 			break;
 		}
 	}
@@ -90,6 +126,27 @@ namespace Engine
 	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
+		case SDL_SCANCODE_W:
+			cout << "You are releasing W";
+			break;
+		case SDL_SCANCODE_A:
+			cout << "You are releasing A";
+			break;
+		case SDL_SCANCODE_S:
+			cout << "You are releasing S";
+			break;
+		case SDL_SCANCODE_D:
+			cout << "You are releasing D";
+			break;
+		case SDL_SCANCODE_P:
+			m_currentIndex++;
+			if (m_currentIndex > (m_entities.size() - 1))
+			{
+				m_currentIndex = 0;
+			}
+
+			std::cout << m_currentIndex << std::endl;
+			break;
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();
 			break;
@@ -127,12 +184,7 @@ namespace Engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBegin(GL_TRIANGLES);
-		glVertex2f(50.0f, 0.0f);
-		glVertex2f(50.0f, -50.0f);
-		glVertex2f(0.0f, -50.0f);
-		
-		glEnd();
+		m_entities[m_currentIndex]->Draw();
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}
@@ -242,8 +294,7 @@ namespace Engine
 		//
 		m_state = GameState::QUIT;
 
-		// Cleanup SDL pointers
-		//
-		CleanupSDL();
+		
+		m_timer->Stop();
 	}
 }

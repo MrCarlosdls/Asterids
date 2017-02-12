@@ -8,6 +8,10 @@
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="leerModels.cpp" />
     <ClCompile Include="vectors.cpp" />
+    <ClCompile Include="config.cpp" />
+    <ClCompile Include="ship.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="drawable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -21,6 +25,10 @@
     </ClInclude>
     <ClInclude Include="leerModels.h" />
     <ClInclude Include="vectors.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="ship.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="drawable.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
