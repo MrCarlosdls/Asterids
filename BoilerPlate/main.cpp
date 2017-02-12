@@ -13,8 +13,8 @@
 #include "windows.h"
 #include "leerModels.h"
  
-//using namespace std;
-
+using namespace std;
+ 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
 
@@ -30,7 +30,8 @@ int main(int argc, char* argv[])
 	assert(_CrtCheckMemory());
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-	//
+
+    //Leeyendo carpeta models
 	utilities DIR;
 	DIR.ListFile("models");
 

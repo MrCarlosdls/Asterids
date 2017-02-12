@@ -7,6 +7,7 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="leerModels.cpp" />
+    <ClCompile Include="vectors.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -19,6 +20,7 @@
       <Filter>Engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="leerModels.h" />
+    <ClInclude Include="vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
