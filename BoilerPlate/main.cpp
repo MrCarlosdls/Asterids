@@ -3,7 +3,6 @@
 	#include <crtdbg.h>
 #endif
 
-// C++ STL
 #include <cassert>
 #include <iostream>
 #include <string>
@@ -40,7 +39,7 @@ int main(int argc, char* argv[])
 	//
 	if(!app->Init())
 	{
-		std::cout << "App Init error!\n";
+		cout << "App Init error!\n";
 		return -1;
 	}
 

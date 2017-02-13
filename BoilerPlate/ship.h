@@ -3,6 +3,8 @@
 #include "Vectors.h"
 #include "entity.h"
 
+using namespace std;
+
 namespace Asteroids
 {
 	namespace Entities
@@ -11,12 +13,15 @@ namespace Asteroids
 		{
 		public:
 			
-			Ship(const std::vector<Engine::Math::Vectors> points);
+			Ship(const vector<Engine::Math::Vectors> points);
 
 			void MoveUp();
+			void MoveDown();
+			void MoveRight();
+			void MoveLeft();
 			void Draw();
 		private:
-			std::vector<Engine::Math::Vectors> m_points;
+			vector<Engine::Math::Vectors> m_points;
 		};
 	}
 }

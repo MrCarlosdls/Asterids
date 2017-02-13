@@ -1,6 +1,8 @@
 #include "Vectors.h"
 #include <cmath>
 
+using namespace std;
+
 namespace Engine
 {
 	namespace Math
@@ -16,8 +18,6 @@ namespace Engine
 			, m_y(y)
 			, m_length(0)
 		{
-			// Calculate length for the given point
-			//
 			Length();
 		}
 
@@ -33,7 +33,7 @@ namespace Engine
 
 		float Vectors::Length()
 		{
-			return std::sqrt(m_x * m_x + m_y * m_y);
+			return sqrt(m_x * m_x + m_y * m_y);
 		}
 
 		float Vectors::SquaredLength()
@@ -41,12 +41,10 @@ namespace Engine
 			return m_x * m_x + m_y * m_y;
 		}
 
-		// operators
-		//
+		///OPERADORES
 		Vectors& Vectors::operator=(const Vectors& rhs)
 		{
-			// Prevent self assignment. Two objects
-			// are equal if their memory address are equal.
+		
 			if (this == &rhs)
 			{
 				return *this;
@@ -148,7 +146,6 @@ namespace Engine
 				m_y != rhs.m_y;
 		}
 
-		// friend functions
 		Vectors operator*(float scaleUnit, const Vectors& rhs)
 		{
 			Vectors scaled;

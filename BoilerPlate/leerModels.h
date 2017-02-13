@@ -2,9 +2,6 @@
 
 #include <vector>
 #include <string>
-//#include <fstream>
-//#include <Windows.h>
-//#include <iostream>
 
 using namespace std;
 

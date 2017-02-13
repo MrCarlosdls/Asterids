@@ -1,16 +1,14 @@
 #pragma once
 #ifndef APP_HPP
 #define APP_HPP
-
-// C++ STL
 #include <string>
 #include <list>
 #include <vector>
-
-// Asteroids
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 #include "ship.h"
+
+using namespace std;
 
 namespace Engine
 {
@@ -63,14 +61,14 @@ namespace Engine
 		int									m_height;
 		int									m_nUpdates;
 		double								m_lastFrameTime;
-		std::string							m_title;
+		string						     	m_title;
 		SDL_Window*							m_mainWindow;
 		SDL_GLContext						m_context;
 		GameState::State					m_state;
 		Engine::TimeManager*				m_timer;
 
 		int	m_currentIndex;
-		std::vector<Asteroids::Entities::Ship*> m_entities;
+		vector<Asteroids::Entities::Ship*> m_entities;
 
 	};
 }

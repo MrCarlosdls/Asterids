@@ -1,15 +1,14 @@
 #include "App.hpp"
+
 #include <iostream>
 #include <algorithm>
-
-// OpenGL includes
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
-
 #include <fstream>
 #include <sstream>
 #include <string>
 #include "config.h"
+
 
 using namespace std;
 
@@ -18,7 +17,7 @@ namespace Engine
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 
-	App::App(const std::string& title, const int width, const int height)
+	App::App(const string& title, const int width, const int height)
 		: m_title(title)
 		, m_width(width)
 		, m_height(height)
@@ -33,12 +32,15 @@ namespace Engine
 
 	App::~App()
 	{
-
-		for(auto entity : m_entities)
+		// Delete entities
+		//
+		for (auto entity : m_entities)
 		{
 			delete entity;
 		}
 
+		// Clear list
+		//
 		m_entities.clear();
 
 		CleanupSDL();
@@ -48,7 +50,7 @@ namespace Engine
 	{
 		if (m_state != GameState::INIT_SUCCESSFUL)
 		{
-			std::cerr << "Game INIT was not successful." << std::endl;
+			cerr << "Game INIT was not successful." << endl;
 			return;
 		}
 
@@ -96,26 +98,28 @@ namespace Engine
 	}
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
-	{		
-		switch (keyBoardEvent.keysym.scancode)
+	{
+
+		
+			switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_W:
-			cout << "You are pressing W";
-			//m_entities[m_currentIndex]->MoveUp();
+			m_entities[m_currentIndex]->MoveUp();
 			break;
 		case SDL_SCANCODE_A:
-			cout << "You are pressing A";
+			m_entities[m_currentIndex]->MoveLeft();
 			break;
 		case SDL_SCANCODE_S:
-			cout << "You are pressing S";
+			m_entities[m_currentIndex]->MoveDown();
 			break;
 		case SDL_SCANCODE_D:
-			cout << "You are pressing D";
+			m_entities[m_currentIndex]->MoveRight();
 			break;
-
-		default:			
+			
+		
+		default:
 			//SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
-			    SDL_Log("Physical %s key acting as %s key",
+			SDL_Log("Physical %s key acting as %s key",
 				SDL_GetScancodeName(keyBoardEvent.keysym.scancode),
 				SDL_GetKeyName(keyBoardEvent.keysym.sym));
 			break;
@@ -127,16 +131,12 @@ namespace Engine
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_W:
-			cout << "You are releasing W";
 			break;
 		case SDL_SCANCODE_A:
-			cout << "You are releasing A";
 			break;
 		case SDL_SCANCODE_S:
-			cout << "You are releasing S";
 			break;
 		case SDL_SCANCODE_D:
-			cout << "You are releasing D";
 			break;
 		case SDL_SCANCODE_P:
 			m_currentIndex++;
@@ -172,7 +172,7 @@ namespace Engine
 			endTime = m_timer->GetElapsedTimeInSeconds();
 		}
 
-		//double elapsedTime = endTime - startTime;
+		//double elapsedTime = endTime - startTime;        
 
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 
@@ -184,6 +184,7 @@ namespace Engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		//
 		m_entities[m_currentIndex]->Draw();
 
 		SDL_GL_SwapWindow(m_mainWindow);
@@ -195,16 +196,16 @@ namespace Engine
 		//
 		if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		{
-			std::cerr << "Failed to init SDL" << std::endl;
+			cerr << "Failed to init SDL" << endl;
 			return false;
 		}
 
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-		Uint32 flags =  SDL_WINDOW_OPENGL     |
-						SDL_WINDOW_SHOWN      |
-						SDL_WINDOW_RESIZABLE;
+		Uint32 flags = SDL_WINDOW_OPENGL |
+			SDL_WINDOW_SHOWN |
+			SDL_WINDOW_RESIZABLE;
 
 		m_mainWindow = SDL_CreateWindow(
 			m_title.c_str(),
@@ -217,7 +218,7 @@ namespace Engine
 
 		if (!m_mainWindow)
 		{
-			std::cerr << "Failed to create window!" << std::endl;
+			cerr << "Failed to create window!" << endl;
 			SDL_Quit();
 			return false;
 		}
@@ -261,7 +262,7 @@ namespace Engine
 		GLenum err = glewInit();
 		if (GLEW_OK != err)
 		{
-			std::cerr << "Error: " << glewGetErrorString(err) << std::endl;
+			cerr << "Error: " << glewGetErrorString(err) << endl;
 			return false;
 		}
 
@@ -294,7 +295,9 @@ namespace Engine
 		//
 		m_state = GameState::QUIT;
 
-		
+		// Stop the timer
+		//
 		m_timer->Stop();
 	}
 }
+

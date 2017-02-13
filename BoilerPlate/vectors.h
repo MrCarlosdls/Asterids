@@ -7,23 +7,17 @@ namespace Engine
 		class Vectors
 		{
 		public:
-			/*
-			* CONST
-			*/
+		
 			Vectors();
 			Vectors(float x, float y);
 
-			/*
-			* PUBLIC FUNCTIONS
-			*/
+		
 			float Length();
 			float SquaredLength();
 			const float GetX();
 			const float GetY();
 
-			/*
-			* OPERATORS
-			*/
+			///OPERADORES
 			Vectors& operator=(const Vectors& rhs);
 			Vectors& operator+=(const Vectors& rhs);
 			Vectors& operator-=(const Vectors& rhs);
