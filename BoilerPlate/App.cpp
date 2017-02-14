@@ -103,6 +103,18 @@ namespace Engine
 		
 			switch (keyBoardEvent.keysym.scancode)
 		{
+			case SDL_SCANCODE_UP:
+			m_entities[m_currentIndex]->MoveUp();
+			break;
+		case SDL_SCANCODE_LEFT:
+			m_entities[m_currentIndex]->MoveLeft();
+			break;
+		case SDL_SCANCODE_DOWN:
+			m_entities[m_currentIndex]->MoveDown();
+			break;
+		case SDL_SCANCODE_RIGHT:
+			m_entities[m_currentIndex]->MoveRight();
+			break;
 		case SDL_SCANCODE_W:
 			m_entities[m_currentIndex]->MoveUp();
 			break;
@@ -145,7 +157,7 @@ namespace Engine
 				m_currentIndex = 0;
 			}
 
-			std::cout << m_currentIndex << std::endl;
+			cout << m_currentIndex << endl;
 			break;
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();

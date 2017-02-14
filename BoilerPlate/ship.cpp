@@ -11,7 +11,7 @@ namespace Asteroids
 
 		void Ship::MoveUp()
 		{
-			Engine::Math::Vectors velocity = Engine::Math::Vectors(0, 1);
+			Engine::Math::Vectors velocity = Engine::Math::Vectors(0, 3);
 			Engine::Math::Vectors newPos =
 				m_position + velocity;
 
@@ -20,7 +20,7 @@ namespace Asteroids
 
 		void Ship::MoveDown()
 		{
-			Engine::Math::Vectors velocity = Engine::Math::Vectors(0 , -1);
+			Engine::Math::Vectors velocity = Engine::Math::Vectors(0 , -3);
 			Engine::Math::Vectors newPos =
 				m_position + velocity;
 
@@ -29,7 +29,7 @@ namespace Asteroids
 
 		void Ship::MoveRight()
 		{
-			Engine::Math::Vectors velocity = Engine::Math::Vectors(1,0);
+			Engine::Math::Vectors velocity = Engine::Math::Vectors(3,0);
 			Engine::Math::Vectors newPos =
 				m_position + velocity;
 
@@ -37,7 +37,7 @@ namespace Asteroids
 		}
 		void Ship::MoveLeft()
 		{
-			Engine::Math::Vectors velocity = Engine::Math::Vectors(-1,0);
+			Engine::Math::Vectors velocity = Engine::Math::Vectors(-3,0);
 			Engine::Math::Vectors newPos =
 				m_position + velocity;
 
