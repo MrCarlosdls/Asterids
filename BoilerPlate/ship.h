@@ -15,12 +15,20 @@ namespace Asteroids
 		public:
 			
 			Ship(const vector<Engine::Math::Vectors> points);
-
+			
 			void MoveUp();
 			void MoveDown();
 			void MoveRight();
 			void MoveLeft();
 			void Draw();
+			void WrapAround();
+		public:
+
+			int *renderer;
+			Ship(int *r)
+				:renderer(r)
+			{}
+
 		private:
 			vector<Engine::Math::Vectors> m_points;
 			

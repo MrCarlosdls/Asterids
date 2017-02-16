@@ -80,6 +80,27 @@ namespace Asteroids
 			m_anguloEnRadianes = (m_angulo + M_ANGULO_INICIAL) * (PI / 180);
 
 		}
+
+		void Ship::WrapAround()
+		{
+		/*	if (x < 0) {
+				x += renderer->WIDTH;
+			}
+
+			else if (x >= renderer->WIDTH) {
+				x -= renderer->WIDTH;
+			}
+			else if (y < 0) {
+				y += renderer->HEIDTH;
+			}
+			else if (y >= renderer->HEIGHT)
+			{
+				y -= renderer->HEIGHT;
+		}
+		*/
+		}
+
+
 		void Ship::Draw()
 		{
 			Entity::Draw(GL_LINE_LOOP, m_points);
@@ -99,7 +120,14 @@ namespace Asteroids
 			else if (y >= renderer->ResolutionY) {
 				y -= renderer->ResolutionY;
 			}*/
+			
+			
 
+
+
+			
+			
+			
 		}
 	}
 }
