@@ -3,6 +3,7 @@
 #include "Vectors.h"
 #include "entity.h"
 
+
 using namespace std;
 
 namespace Asteroids
@@ -22,6 +23,7 @@ namespace Asteroids
 			void Draw();
 		private:
 			vector<Engine::Math::Vectors> m_points;
+			
 		};
 	}
 }

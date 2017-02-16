@@ -187,6 +187,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="constante.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="entity.h" />

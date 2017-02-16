@@ -29,6 +29,7 @@
     <ClInclude Include="ship.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="drawable.h" />
+    <ClInclude Include="constante.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

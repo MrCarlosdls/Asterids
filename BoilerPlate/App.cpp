@@ -99,8 +99,6 @@ namespace Engine
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
 	{
-
-		
 			switch (keyBoardEvent.keysym.scancode)
 		{
 			case SDL_SCANCODE_UP:
@@ -115,6 +113,7 @@ namespace Engine
 		case SDL_SCANCODE_RIGHT:
 			m_entities[m_currentIndex]->MoveRight();
 			break;
+
 		case SDL_SCANCODE_W:
 			m_entities[m_currentIndex]->MoveUp();
 			break;
@@ -122,13 +121,11 @@ namespace Engine
 			m_entities[m_currentIndex]->MoveLeft();
 			break;
 		case SDL_SCANCODE_S:
-			m_entities[m_currentIndex]->MoveDown();
+			//m_entities[m_currentIndex]->MoveDown();
 			break;
 		case SDL_SCANCODE_D:
 			m_entities[m_currentIndex]->MoveRight();
 			break;
-			
-		
 		default:
 			//SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
 			SDL_Log("Physical %s key acting as %s key",

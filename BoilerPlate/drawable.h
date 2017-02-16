@@ -13,6 +13,7 @@ namespace Engine
 			virtual void Draw(unsigned int mode, std::vector<Math::Vectors> points);
 		protected:
 			Engine::Math::Vectors m_position;
+			float m_angulo;
 		};
 	}
 }

@@ -7,7 +7,17 @@ namespace Asteroids
 	namespace Entities
 	{
 		class Entity : public Engine::Graphics::Drawable2D
-		{};
+		{
+		
+		public:
+			 float m_anguloEnRadianes;
+		
+		};
+
+		
+		
+		
+		
 	}
 }
 
