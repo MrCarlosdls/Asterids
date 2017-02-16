@@ -31,6 +31,8 @@ int main(int argc, char* argv[])
 	//utilities DIR;
 	//DIR.ListFile("models");
 
+
+
 	// Create Game Object
 	//
 	Engine::App* app = new Engine::App("Boiler Plate!", WIDTH, HEIGHT);

@@ -3,6 +3,7 @@
 #include <cmath>
 #include "constante.h"
 
+
 using namespace std;
 
 namespace Asteroids
@@ -23,6 +24,7 @@ namespace Asteroids
 		
 		
 		}
+	
 
 		void Ship::MoveUp()
 		{
@@ -63,7 +65,6 @@ namespace Asteroids
 			m_anguloEnRadianes = (m_angulo + M_ANGULO_INICIAL) * (PI / 180);
 
 
-
 		}
 		void Ship::MoveLeft()
 		{
@@ -82,6 +83,23 @@ namespace Asteroids
 		void Ship::Draw()
 		{
 			Entity::Draw(GL_LINE_LOOP, m_points);
+
+
+			/*if (x < 0) {
+				x += renderer->ResolutionX;
+			}
+
+			else if (x >= renderer->ResolutionX) {
+				x -= renderer->ResolutionX;
+			}
+
+			else if (y < 0) {
+				y += renderer->ResolutionY;
+			}
+			else if (y >= renderer->ResolutionY) {
+				y -= renderer->ResolutionY;
+			}*/
+
 		}
 	}
 }

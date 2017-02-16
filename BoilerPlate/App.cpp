@@ -30,6 +30,7 @@ namespace Engine
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 	}
 
+
 	App::~App()
 	{
 		// Delete entities

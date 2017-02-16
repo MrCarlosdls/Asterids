@@ -20,7 +20,7 @@ namespace Engine
 		{
 			Length();
 		}
-
+		
 		const float Vectors::GetX()
 		{
 			return m_x;
