@@ -15,7 +15,7 @@ namespace Engine
 			wstring w_buff(buffer);
 			return string(w_buff.begin(), w_buff.end());
 		}
-
+		 
 		string utilities::GetExePath()
 		{
 			string f = GetExeFileName();

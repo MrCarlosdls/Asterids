@@ -12,11 +12,9 @@ namespace Engine
 		class utilities
 		{
 		public:
-		
 			string BuildPath(string prefix, string sufix);
 			vector<std::string> ListFiles(string dir, string wildcard = "*.*");
 		private:
-			
 			string GetExeFileName();
 			string GetExePath();
 			string GetLocalPathExpr(string dir);
@@ -24,9 +22,6 @@ namespace Engine
 		};
 	}
 }
-
-
-
 
 
 /*

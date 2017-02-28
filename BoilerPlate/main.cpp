@@ -12,6 +12,7 @@
 #include "windows.h"
 #include "leerModels.h"
  
+
 using namespace std;
  
 const int WIDTH = 1136;
@@ -31,11 +32,9 @@ int main(int argc, char* argv[])
 	//utilities DIR;
 	//DIR.ListFile("models");
 
-
-
 	// Create Game Object
 	//
-	Engine::App* app = new Engine::App("Boiler Plate!", WIDTH, HEIGHT);
+	Application::App* app = new Application::App("Boiler Plate!", WIDTH, HEIGHT);
 
 	// Initialize game
 	//

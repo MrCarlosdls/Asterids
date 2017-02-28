@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "ship.h"
+#include "vectors.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ namespace Asteroids
 		class Configuration
 		{
 		public:
-			vector<Entities::Ship*> LoadModels(); 
+			std::vector<std::vector<Engine::Math::Vectors>> LoadModels() const;
 		};
 	}
 }

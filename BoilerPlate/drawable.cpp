@@ -1,4 +1,4 @@
-#include "drawable.h"
+/*#include "drawable.h"
 #include <iostream>
 #include <SDL2\SDL_opengl.h>
 
@@ -34,4 +34,4 @@ namespace Engine
 			glEnd();
 		}
 	}
-}
+}*/

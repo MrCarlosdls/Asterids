@@ -173,30 +173,54 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="asteroide.cpp" />
+    <ClCompile Include="componente.cpp" />
+    <ClCompile Include="componenteDeTransfomacion.cpp" />
     <ClCompile Include="config.cpp" />
+    <ClCompile Include="cuerpoRigido.cpp" />
     <ClCompile Include="drawable.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="escena.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gameobject.cpp" />
     <ClCompile Include="leerModels.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="manager.cpp" />
+    <ClCompile Include="mathUtilities.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="ship.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="unique.cpp" />
     <ClCompile Include="vectors.cpp" />
+    <ClCompile Include="vectors1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="asteroide.h" />
+    <ClInclude Include="componente.h" />
+    <ClInclude Include="componenteDeTransformacion.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="constante.h" />
+    <ClInclude Include="cuerpoRigido.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="escena.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="leerModels.h" />
+    <ClInclude Include="manager.h" />
+    <ClInclude Include="mathUtilities.h" />
+    <ClInclude Include="render.h" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="ship.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="TimeManager.hpp" />
+    <ClInclude Include="unique.h" />
+    <ClInclude Include="update.h" />
     <ClInclude Include="vectors.h" />
+    <ClInclude Include="vectors1.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\enterprise.points" />

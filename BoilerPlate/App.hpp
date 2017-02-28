@@ -1,16 +1,16 @@
 #pragma once
-#ifndef APP_HPP
-#define APP_HPP
+
 #include <string>
 #include <list>
 #include <vector>
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 #include "ship.h"
+#include "Game.h"
 
 using namespace std;
 
-namespace Engine
+namespace Application
 {
 	class App : public SDLEvent
 	{
@@ -18,7 +18,7 @@ namespace Engine
 		/* =============================================================
 		* ENUMERATORS
 		* ============================================================= */
-		struct GameState
+		struct AppState
 		{
 			enum State
 			{
@@ -39,15 +39,15 @@ namespace Engine
 		void Execute						( );
 		bool Init							( );
 		void Update							( );
-		void Render							( );
+		void Render							( )const;
 	private:
 		/* =============================================================
 		 * PRIVATE FUNCTIONS
 		 * ============================================================= */
 		bool SDLInit						( );
-		bool GlewInit						( );
-		void SetupViewport					( );
-		void CleanupSDL						( );
+		static bool GlewInit				( );
+		void SetupViewport                  ( ) const;
+		void CleanupSDL                     ( ) const;
 		void OnResize						( int width, int height ) override;
 		void OnExit							( ) override;
 		void OnKeyDown						( SDL_KeyboardEvent keyBoardEvent ) override;
@@ -61,15 +61,16 @@ namespace Engine
 		int									m_height;
 		int									m_nUpdates;
 		double								m_lastFrameTime;
-		string						     	m_title;
+		std::string						   	m_title;
 		SDL_Window*							m_mainWindow;
 		SDL_GLContext						m_context;
-		GameState::State					m_state;
+		AppState::State						m_state;
 		Engine::TimeManager*				m_timer;
 
-		int	m_currentIndex;
-		vector<Asteroids::Entities::Ship*> m_entities;
+		/*int	m_currentIndex;
+		vector<Asteroids::Entities::Ship*> m_entities;*/
+		Asteroids::Game* m_game;
 
 	};
 }
-#endif /* GAME_HPP */
+

@@ -1,133 +1,147 @@
 #include "ship.h"
 #include <SDL2\SDL_opengl.h>
 #include <cmath>
-#include "constante.h"
-
-
-using namespace std;
+#include "mathUtilities.h"
 
 namespace Asteroids
 {
 	namespace Entities
 	{
-		
-		const float M_ANGULO_INICIAL = 90.0f;
-		Ship::Ship(const std::vector<Engine::Math::Vectors> points)
-			: m_points(points)
-			//,M_ANGULO_INICIAL
+		const float ANGLE_OFFSET = 90.0f;
+		const float THRUST = 3.0f;
+		const float MAX_SPEED = 350.0f;
+		const float ROTATION_SPEED = 5.0f;
+		const int RESTART_BLINK_FRAME_TIME = 30;
+		const int RESPAWN_TIME = 120;
+
+		Ship::Ship(const std::vector<points_set> points)
+			: m_ships(points)
+			, m_currentIndex(0)
+			, m_nRespawnTime(0)
+			, m_pulse(false)
+			, m_currentPulseCount(0)
+			, m_totalPulseCount(30)
+			, m_currentColor(Engine::Math::Vectors1(1.0f))
 		{
+			m_radius = 10;
 
+			m_transforms = new Engine::Components::componenteDeTransformacion();
 
-			m_angulo = 0.0f;
-			m_anguloEnRadianes = M_ANGULO_INICIAL * (PI / 180);
-		
-		
-		
-		}
-	
+			AttachComponent(m_transforms);
 
-		void Ship::MoveUp()
-		{
-			//Engine::Math::Vectors velocity = Engine::Math::Vectors(0, 3);
-
-			Engine::Math::Vectors velocity
-			(
-
-				10 * cosf(m_anguloEnRadianes),
-				10 * sinf(m_anguloEnRadianes)
+			    m_physics = new Engine::Components::componenteRigido(
+				Engine::Math::Vectors(0.0f),
+				m_transforms->GetPosition(),
+				1.0f,
+				0.999f
 			);
-
-			Engine::Math::Vectors newPos =
-				m_position + velocity;
-
-			Entity::Translate(newPos);
+			AttachComponent(m_physics);
+			CalculateMass();
 		}
 
-		void Ship::MoveDown()
+		Ship::~Ship()
 		{
-			Engine::Math::Vectors velocity = Engine::Math::Vectors(0 , -3);
-			Engine::Math::Vectors newPos =
-				m_position + velocity;
-
-			Entity::Translate(newPos);
-		}
-
-		void Ship::MoveRight()
-		{
-			/*Engine::Math::Vectors velocity = Engine::Math::Vectors(3,0);
-			Engine::Math::Vectors newPos =
-				m_position + velocity;
-
-			Entity::Translate(newPos);*/
-
-
-			m_angulo -= 5.0f;
-			m_anguloEnRadianes = (m_angulo + M_ANGULO_INICIAL) * (PI / 180);
-
-
-		}
-		void Ship::MoveLeft()
-		{
-			/*Engine::Math::Vectors velocity = Engine::Math::Vectors(-3,0);
-			Engine::Math::Vectors newPos =
-				m_position + velocity;
-
-			Entity::Translate(newPos);
-			*/
-
-
-			m_angulo += 5.0f;
-			m_anguloEnRadianes = (m_angulo + M_ANGULO_INICIAL) * (PI / 180);
-
-		}
-
-		void Ship::WrapAround()
-		{
-		/*	if (x < 0) {
-				x += renderer->WIDTH;
-			}
-
-			else if (x >= renderer->WIDTH) {
-				x -= renderer->WIDTH;
-			}
-			else if (y < 0) {
-				y += renderer->HEIDTH;
-			}
-			else if (y >= renderer->HEIGHT)
+			
+			for (auto model : m_ships)
 			{
-				y -= renderer->HEIGHT;
-		}
-		*/
+				model.clear();
+			}
+			m_ships.clear();
+			//Entity::~Entity();
 		}
 
 
-		void Ship::Draw()
+		void Ship::MoveUp() const
 		{
-			Entity::Draw(GL_LINE_LOOP, m_points);
+			m_physics->ApplyForce(
+				Engine::Math::Vectors(THRUST),
+				m_transforms->GetAngleIRadians() + Engine::Math::DegreesToRadians(ANGLE_OFFSET)
+			);
+		}
 
+		void Ship::MoveRight() const
+		{
+			m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() - ROTATION_SPEED);
+		}
 
-			/*if (x < 0) {
-				x += renderer->ResolutionX;
+		void Ship::MoveLeft() const
+		{
+			m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() + ROTATION_SPEED);
+		}
+
+		void Ship::ChangeShip()
+		{
+			m_currentIndex++;
+			if (m_currentIndex > (m_ships.size() - 1))
+			{
+				m_currentIndex = 0;
 			}
 
-			else if (x >= renderer->ResolutionX) {
-				x -= renderer->ResolutionX;
+			CalculateMass();
+		}
+
+		void Ship::Update(float deltaTime)
+		{
+			float speed = fabs(m_physics->GetSpeed());
+			if (speed > MAX_SPEED)
+			{
+				m_physics->SetVelocity(
+					Engine::Math::Vectors(
+					(m_physics->GetVelocity().m_x / speed) * MAX_SPEED,
+						(m_physics->GetVelocity().m_y / speed) * MAX_SPEED
+					)
+				);
+
+				m_currentSpeed = fabs(m_physics->GetVelocity().Length());
 			}
 
-			else if (y < 0) {
-				y += renderer->ResolutionY;
+			Entity::Update(deltaTime);
+		}
+
+		
+	void Ship::Render()
+	{
+		if (!m_canCollide)
+		{
+			if (m_nRespawnTime >= RESPAWN_TIME)
+			{
+				SetCollision(true);
+				m_nRespawnTime = 0;
+				m_pulse = false;
+				m_currentColor = Engine::Math::Vectors1(1.0f);
 			}
-			else if (y >= renderer->ResolutionY) {
-				y -= renderer->ResolutionY;
-			}*/
-			
-			
 
+			m_nRespawnTime++;
 
+			if (m_pulse)
+			{
+				if (m_totalPulseCount > m_currentPulseCount)
+				{
+					m_currentPulseCount++;
+					return;
+				}
+				if (m_nUpdates % RESTART_BLINK_FRAME_TIME == 0)
+				{
+					m_currentPulseCount = 0;
+				}
+			}
+		}
 
-			
-			
-			
+		Entity::Render(GL_LINE_LOOP, m_ships[m_currentIndex], m_currentColor);
+	}
+
+		void Ship::CalculateMass()
+		{
+			m_physics->SetMass(m_ships[m_currentIndex].size() / 10.0f);
+		}
+		void Ship::Respawn()
+		{
+			SetCollision(false);
+			m_pulse = true;
+			m_currentColor = Engine::Math::Vectors1(1.0f, 0.0f, 0.0f);
+			m_transforms->Teleport(0.0f, 0.0f);
+			m_transforms->resetShip();
+			m_physics->SetVelocity(Engine::Math::Vectors(0.f, 0.f));
 		}
 	}
 }

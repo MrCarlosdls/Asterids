@@ -1,4 +1,4 @@
-#include "Vectors.h"
+#include "vectors.h"
 #include <cmath>
 
 using namespace std;
@@ -7,6 +7,8 @@ namespace Engine
 {
 	namespace Math
 	{
+		Vectors Vectors::Origin = Vectors();
+
 		Vectors::Vectors()
 			: m_x(0.0f)
 			, m_y(0.0f)
@@ -20,8 +22,17 @@ namespace Engine
 		{
 			Length();
 		}
+
+		Vectors::Vectors(float uniform)
+			: m_x(uniform)
+			, m_y(uniform)
+			, m_length(0)
+
+		{
+			Length();
+		}
 		
-		const float Vectors::GetX()
+	/*	const float Vectors::GetX()
 		{
 			return m_x;
 		}
@@ -30,15 +41,27 @@ namespace Engine
 		{
 			return m_y;
 		}
+		*/
 
-		float Vectors::Length()
+		float Vectors::Length() const
 		{
 			return sqrt(m_x * m_x + m_y * m_y);
 		}
 
-		float Vectors::SquaredLength()
+		float Vectors::SquaredLength() const
 		{
 			return m_x * m_x + m_y * m_y;
+		}
+
+		float Vectors::Normalize()
+		{
+			Length();
+			float escalaInvertida = 1.0f / m_length;
+			m_x *= escalaInvertida;
+			m_y *= escalaInvertida;
+
+			return m_length;
+
 		}
 
 		///OPERADORES
