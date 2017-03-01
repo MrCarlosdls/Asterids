@@ -29,7 +29,7 @@ namespace Asteroids
 			m_height
 		);
 		CreatePlayer();
-		CreateAsteroids(5, Entities::Asteroid::AsteroidSize::BIG);
+		CreateAsteroids(10, Entities::Asteroid::AsteroidSize::BIG);
 	}
 
 	void Game::Update(double deltaTime)

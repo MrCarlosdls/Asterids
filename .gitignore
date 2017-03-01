@@ -37,4 +37,8 @@
 .vs/
 x64/
 x86/
+<<<<<<< HEAD
 Debug/
+=======
+Debug/
+>>>>>>> 70331a64df8d66bcba7a5ac7364fcb672e0ce7f2
