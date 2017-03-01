@@ -23,6 +23,7 @@
     <ClCompile Include="escena.cpp" />
     <ClCompile Include="asteroide.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="escena.h" />
     <ClInclude Include="asteroide.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

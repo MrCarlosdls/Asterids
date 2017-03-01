@@ -3,6 +3,7 @@
 #include "config.h"
 #include "manager.h"
 #include "asteroide.h"
+#include <algorithm>
 
 namespace Asteroids
 {
@@ -17,7 +18,7 @@ namespace Asteroids
 	{
 		delete m_scene;
 
-		m_ships.clear();
+		m_bullets.clear();
 	}
 
 	void Game::Init()
@@ -28,14 +29,15 @@ namespace Asteroids
 			m_height
 		);
 		CreatePlayer();
-		CreateAsteroids(10, Entities::Asteroid::AsteroidSize::BIG);
+		CreateAsteroids(5, Entities::Asteroid::AsteroidSize::BIG);
 	}
 
-	void Game::Update(float delta) const
+	void Game::Update(double deltaTime)
 	{
 		HandleInput();
-		m_scene->Update(delta);
+		m_scene->Update(deltaTime);
 		CheckCollisions();
+		limpiarBullets();
 	}
 
 	void Game::Render() const
@@ -43,7 +45,7 @@ namespace Asteroids
 		m_scene->Render();
 	}
 
-	void Game::HandleInput() const
+	void Game::HandleInput()
 	{
 		if (Engine::Input::InputManager::Instance().IsKeyPressed('w'))
 		{
@@ -59,10 +61,16 @@ namespace Asteroids
 		{
 			m_player->MoveRight();
 		}
-
 		if (Engine::Input::InputManager::Instance().IsKeyReleased('p'))
 		{
 			m_player->ChangeShip();
+		}
+		if (Engine::Input::InputManager::Instance().IsKeyReleased(' '))
+		{
+			if (m_player->IsRespawning()) return;
+			Entities::Bullets* bala = m_player->Shoot();
+			m_bullets.push_back(bala);
+			m_scene->AddChild(bala);
 		}
 	}
 
@@ -79,7 +87,7 @@ namespace Asteroids
 		for (int i = 0; i < amount; ++i)
 		{
 			Entities::Asteroid* pAsteroid =
-				new Entities::Asteroid(Entities::Asteroid::AsteroidSize::BIG);
+				new Entities::Asteroid(size,position);
 
 			m_scene->AddChild(pAsteroid);
 
@@ -89,37 +97,80 @@ namespace Asteroids
 			}
 		}
 	}
-			void Game::CreateDebris(Entities::Asteroid::AsteroidSize::Size previousSize, Engine::Math::Vectors position) const
-			{
-				if (previousSize == Entities::Asteroid::AsteroidSize::BIG)
-				{
-					CreateAsteroids(2, Entities::Asteroid::AsteroidSize::MEDIUM, position);
-				}
+	void Game::CreateDebris(Entities::Asteroid* asteroide) const
+	{
+		Entities::Asteroid::AsteroidSize::Size currentSize = asteroide->GetSize();
+		if (currentSize == Entities::Asteroid::AsteroidSize::BIG)
+		{
+			CreateAsteroids(2, Entities::Asteroid::AsteroidSize::MEDIUM, asteroide->GetPosition());
+		}
 
-				if (previousSize == Entities::Asteroid::AsteroidSize::MEDIUM)
-				{
-					CreateAsteroids(2, Entities::Asteroid::AsteroidSize::SMALL, position);
-				}
+		if (currentSize == Entities::Asteroid::AsteroidSize::MEDIUM)
+		{
+			CreateAsteroids(2, Entities::Asteroid::AsteroidSize::SMALL, asteroide->GetPosition());
+		}
+		m_scene->RemoveChild(asteroide);
+	}
+
+	void Game::CheckCollisions()
+	{
+		if (!m_player->CanCollide())
+			return;
+
+		for (auto a : m_scene->GetChildren())
+		{
+			Entities::Asteroid* asteroide = dynamic_cast<Entities::Asteroid*>(a);
+			if (asteroide)
+			{
+				inpactoConJugador(asteroide);
+				inpactoConBullet(asteroide);
 			}
-
-			void Game::CheckCollisions() const
-			{
-				if (!m_player->CanCollide()) return;
-
-				for (auto a : m_scene->GetChildren())
-				{
-					Entities::Asteroid* pAsteroid = dynamic_cast<Entities::Asteroid*>(a);
-					if (pAsteroid)
-					{
-						if (m_player->IsColliding(pAsteroid))
-						{
-							Entities::Asteroid::AsteroidSize::Size currentSize = pAsteroid->GetSize();
-							m_scene->RemoveChild(a);
-							CreateDebris(currentSize, m_player->GetPosition());
-							m_player->Respawn();
-						}
-					}
-				}
 		}
 	}
+	void Game::limpiarBullets()
+	{
+		if (m_bullets.size() == 0) return;
+
+		auto iter = std::find_if(m_bullets.begin(), m_bullets.end(),
+			[&](Entities::Bullets* bullet) { return bullet->ShouldBeDeleted() || bullet->IsColliding(); });
+		if (iter != m_bullets.end())
+		{
+			deleteBullet(*iter);
+		}
+
+	}
+	void Game::inpactoConJugador(Entities::Asteroid* asteroide)const
+	{
+		if (m_player->IsColliding(asteroide))
+		{
+			CreateDebris(asteroide);
+			m_player->Respawn();
+		}
+	}
+
+	void Game::inpactoConBullet(Entities::Asteroid* asteroide)
+	{
+		for (auto bullet : m_bullets)
+		{
+			if (bullet->IsColliding(asteroide))
+			{
+				CreateDebris(asteroide);
+			}
+		}
+	}
+	void Game::deleteBullet(Entities::Bullets* bala)
+	{
+		m_scene->RemoveChild(bala);
+
+
+		auto bulletResult = find(m_bullets.begin(), m_bullets.end(), bala);
+		if (m_bullets.size() > 0 && bulletResult != m_bullets.end())
+		{
+			m_bullets.erase(bulletResult);
+		}
+	}
+}
+
+
+	
 

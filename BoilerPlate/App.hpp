@@ -61,11 +61,12 @@ namespace Application
 		int									m_height;
 		int									m_nUpdates;
 		double								m_lastFrameTime;
-		std::string						   	m_title;
+		string						     	m_title;
 		SDL_Window*							m_mainWindow;
 		SDL_GLContext						m_context;
 		AppState::State						m_state;
 		Engine::TimeManager*				m_timer;
+		double                              m_deltaTime;
 
 		/*int	m_currentIndex;
 		vector<Asteroids::Entities::Ship*> m_entities;*/

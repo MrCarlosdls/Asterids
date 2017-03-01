@@ -13,7 +13,7 @@ using namespace std;
 
 namespace Application
 {
-	const float DESIRED_FRAME_RATE = 30.0f;
+	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 
 	App::App(const string& title, const int width, const int height)
@@ -25,10 +25,12 @@ namespace Application
 		, m_mainWindow(nullptr)
 		, m_game(nullptr)
 		, m_context(nullptr)
+		, m_deltaTime(0.0f)
 	{
 		m_state = AppState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
-	    m_game = new Asteroids::Game(width, height);
+		m_deltaTime = static_cast<double>(DESIRED_FRAME_TIME);
+		m_game = new Asteroids::Game(width, height);
 	}
 
 
@@ -115,24 +117,19 @@ namespace Application
 	void App::Update()
 	{
 		double startTime = m_timer->GetElapsedTimeInSeconds();
-
-		// Update code goes here
-		//
-		m_game->Update(DESIRED_FRAME_TIME);
+		m_game->Update(m_deltaTime);
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;
 
 		while (endTime < nextTimeFrame)
 		{
-			// Spin lock
 			endTime = m_timer->GetElapsedTimeInSeconds();
 		}
 
 		//double elapsedTime = endTime - startTime;        
-
+		m_deltaTime = endTime - startTime;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
-
 		m_nUpdates++;
 	}
 
@@ -235,8 +232,6 @@ namespace Application
 
 	void App::OnResize(int width, int height)
 	{
-		// TODO: Add resize functionality
-		//
 		m_width = width;
 		m_height = height;
 
@@ -245,8 +240,6 @@ namespace Application
 
 	void App::OnExit()
 	{
-		// Exit main for loop
-		//
 		m_state = AppState::QUIT;
 
 	}

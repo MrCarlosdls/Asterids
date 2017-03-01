@@ -29,9 +29,11 @@ namespace Asteroids
 			, m_halfWidth(0)
 			, m_halfHeight(0)
 			,m_radius(0)
+			,m_canCollide(false)
+			,m_state(EntityState::NORMAL)
 		{}
 
-		void Entity::Update(float deltaTime)
+		void Entity::Update(double deltaTime)
 		{
 			if (!GetParent()) return;
 
@@ -44,8 +46,8 @@ namespace Asteroids
 			if (!m_physics || !m_transforms) return;
 
 			Engine::Math::Vectors newPos(
-				m_transforms->GetPosition().m_x + (m_physics->GetVelocity().m_x * deltaTime),
-				m_transforms->GetPosition().m_y + (m_physics->GetVelocity().m_y * deltaTime)
+				m_transforms->GetPosition().m_x + (m_physics->GetVelocity().m_x *static_cast<float>(deltaTime)),
+				m_transforms->GetPosition().m_y + (m_physics->GetVelocity().m_y * static_cast<float>(deltaTime))
 			);
 
 			float worldMinX = -m_halfWidth;
@@ -84,12 +86,15 @@ namespace Asteroids
 
 			GameObject::Render();
 		}
-		bool Entity::IsColliding(Entity * rhs) const
+		bool Entity::IsColliding(Entity * rhs) 
 		{
 			Engine::Components::componenteDeTransformacion* t_rhs =
 				rhs->GetComponent<Engine::Components::componenteDeTransformacion>();
 
-			if (!rhs) return false;
+			if (!rhs) 
+				return false;
+			if (!t_rhs)
+				return false;
 
 			float x = m_transforms->GetPosition().m_x - t_rhs->GetPosition().m_x;
 			float y = m_transforms->GetPosition().m_y - t_rhs->GetPosition().m_y;
@@ -97,7 +102,12 @@ namespace Asteroids
 			float radii = m_radius + rhs->m_radius;
 			float distSquared = x * x + y * y;
 
-			return radii * radii >= distSquared;
+	        bool intersectos = radii * radii >= distSquared;
+			if (intersectos)
+			{
+				m_state = EntityState::COLLIDED;
+				return intersectos;
+			}
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Engine
 
 		GameObject::~GameObject()
 		{
-		
+
 			while (!m_components.empty()) delete m_components.back(), m_components.pop_back();
 
 			while (!m_children.empty()) delete m_children.back(), m_children.pop_back();
@@ -50,7 +50,7 @@ namespace Engine
 			delete child;
 		}
 
-		void GameObject::Update(float deltaTime)
+		void GameObject::Update(double deltaTime)
 		{
 			std::vector< Component* >::iterator comp = m_components.begin();
 			for (; comp != m_components.end(); ++comp)

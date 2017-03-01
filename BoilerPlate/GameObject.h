@@ -22,7 +22,7 @@ namespace Engine
 			void RemoveComponent(Component*);
 			void AddChild(GameObject*);
 			void RemoveChild(GameObject*);
-			void Update(float deltaTime) override;
+			void Update(double deltaTime) override;
 			void Render() override;
 
 			
@@ -42,6 +42,8 @@ namespace Engine
 			template<typename T>
 			T* GetComponent()
 			{
+				if (m_components.size() == 0) return nullptr;
+
 				std::vector< Component* >::iterator comp = m_components.begin();
 				for (; comp != m_components.end(); ++comp)
 				{

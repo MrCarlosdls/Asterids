@@ -2,6 +2,13 @@
 #include <vector>
 #include "vectors.h"
 #include "entity.h"
+#include <stdlib.h>
+#include <time.h>
+
+
+
+
+using namespace std;
 
 namespace Asteroids
 {
@@ -10,6 +17,7 @@ namespace Asteroids
 		class Asteroid : public Entity
 		{
 		public:
+			
 		
 			struct AsteroidSize
 			{
@@ -22,7 +30,7 @@ namespace Asteroids
 			};
 
 			explicit Asteroid(AsteroidSize::Size size, Engine::Math::Vectors position = Engine::Math::Vectors::Origin);
-			void Update(float deltaTime) override;
+			void Update(double deltaTime) override;
 			void Render() override;
 			void ApplyRandomTranslation() const;
 

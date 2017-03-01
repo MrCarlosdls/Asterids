@@ -24,7 +24,7 @@ namespace Engine
 		componenteRigido::~componenteRigido()
 		{}
 
-		void componenteRigido::Update(float deltaTime)
+		void componenteRigido::Update(double deltaTime)
 		{
 			m_velocity += m_gravity;
 			m_velocity *= m_drag;

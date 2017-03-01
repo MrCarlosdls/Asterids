@@ -14,7 +14,7 @@ namespace Engine
 			componenteRigido(Math::Vectors gravity, Math::Vectors position, float mass = 1.0f, float dragFactor = 1.0f);
 			~componenteRigido();
 
-			void Update(float deltaTime) override;
+			void Update(double deltaTime) override;
 			void ApplyForce(const Math::Vectors force, float angleInRadians = 1.0f);
 			void SetMass(float mass) { m_mass = mass; }
 			void SetVelocity(Math::Vectors velocity) { m_velocity = velocity; }

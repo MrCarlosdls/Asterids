@@ -13,6 +13,7 @@ namespace Asteroids
 		const float ROTATION_SPEED = 5.0f;
 		const int RESTART_BLINK_FRAME_TIME = 30;
 		const int RESPAWN_TIME = 120;
+		const float BULLET_SPEED = 250;
 
 		Ship::Ship(const std::vector<points_set> points)
 			: m_ships(points)
@@ -80,19 +81,19 @@ namespace Asteroids
 			CalculateMass();
 		}
 
-		void Ship::Update(float deltaTime)
+		void Ship::Update(double deltaTime)
 		{
-			float speed = fabs(m_physics->GetSpeed());
-			if (speed > MAX_SPEED)
+			m_currentSpeed = fabs(m_physics->GetSpeed());
+			if (m_currentSpeed > MAX_SPEED)
 			{
 				m_physics->SetVelocity(
 					Engine::Math::Vectors(
-					(m_physics->GetVelocity().m_x / speed) * MAX_SPEED,
-						(m_physics->GetVelocity().m_y / speed) * MAX_SPEED
+					(m_physics->GetVelocity().m_x / m_currentSpeed) * MAX_SPEED,
+					(m_physics->GetVelocity().m_y / m_currentSpeed) * MAX_SPEED
 					)
 				);
 
-				m_currentSpeed = fabs(m_physics->GetVelocity().Length());
+				m_currentSpeed = MAX_SPEED;
 			}
 
 			Entity::Update(deltaTime);
@@ -108,6 +109,7 @@ namespace Asteroids
 				SetCollision(true);
 				m_nRespawnTime = 0;
 				m_pulse = false;
+				m_state = EntityState::NORMAL;
 				m_currentColor = Engine::Math::Vectors1(1.0f);
 			}
 
@@ -134,6 +136,7 @@ namespace Asteroids
 		{
 			m_physics->SetMass(m_ships[m_currentIndex].size() / 10.0f);
 		}
+
 		void Ship::Respawn()
 		{
 			SetCollision(false);
@@ -142,6 +145,15 @@ namespace Asteroids
 			m_transforms->Teleport(0.0f, 0.0f);
 			m_transforms->resetShip();
 			m_physics->SetVelocity(Engine::Math::Vectors(0.f, 0.f));
+			m_state = EntityState::RESPAWNING;
+		}
+
+		Bullets * Ship::Shoot() const
+		{
+ 			float shootingAngle = m_transforms->GetAngleInDegrees() + ANGLE_OFFSET;
+			float speed = m_currentSpeed + BULLET_SPEED;
+
+			return new Bullets(m_transforms->GetPosition(), Engine::Math::Vectors(speed), shootingAngle);
 		}
 	}
 }

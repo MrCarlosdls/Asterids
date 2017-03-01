@@ -2,6 +2,7 @@
 #include <vector>
 #include "vectors.h"
 #include "entity.h"
+#include "bullet.h"
 
 typedef std::vector<Engine::Math::Vectors> points_set;
 
@@ -12,18 +13,17 @@ namespace Asteroids
 		class Ship : public Entity
 		{
 		public:
-			Ship(const std::vector<points_set> ships);
+			explicit Ship(const std::vector<points_set> ships);
 			~Ship();
 
 			void MoveUp() const;
 			void MoveRight() const;
 			void MoveLeft() const;
 			void ChangeShip();
-			void Update(float deltaTime) override;
+			void Update(double deltaTime) override;
 			void Render() override;
 			void Respawn();
-
-			Engine::Math::Vectors GetPosition() const { return m_transforms->GetPosition(); };
+			Bullets* Shoot() const;
 		private:
 			void CalculateMass();
 			std::vector<points_set> m_ships;
