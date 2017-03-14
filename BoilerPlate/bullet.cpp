@@ -22,9 +22,12 @@ namespace Asteroids
 			
 
 			m_radius = 1.0f;
+			m_width = m_transforms->GetPosition().m_x;
+			m_height = m_transforms->GetPosition().m_y;
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			m_transforms->Teleport(position);
 			AttachComponent(m_transforms);
+
 			m_physics = new Engine::Components::componenteRigido(Engine::Math::Vectors(0.0f), m_transforms->GetPosition());
 			m_physics->ApplyForce(velocidad, Engine::Math::DegreesToRadians(angulo));
 			AttachComponent(m_physics);
@@ -41,6 +44,7 @@ namespace Asteroids
 				m_framelife++;
 				Entity::Update(deltaTime);
 			}
+
 			void Bullets::Render()
 			{
 				glLoadIdentity();
@@ -54,7 +58,6 @@ namespace Asteroids
 				glVertex2f(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y);
 
 				glEnd();
-
 
 			}
 

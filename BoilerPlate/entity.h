@@ -41,6 +41,9 @@ namespace Asteroids
 			Engine::Components::componenteRigido* m_physics;
 			float m_radius; 
 			bool m_canCollide;
+			float m_width;
+			float m_height;
+
 		private:
 			float m_halfWidth;
 			float m_halfHeight;

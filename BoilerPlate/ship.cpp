@@ -25,6 +25,8 @@ namespace Asteroids
 			, m_currentColor(Engine::Math::Vectors1(1.0f))
 		{
 			m_radius = 10;
+			m_width = m_transforms->GetPosition().m_x;
+			m_height = m_transforms->GetPosition().m_y;
 
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 

@@ -31,6 +31,9 @@ namespace Asteroids
 			,m_radius(0)
 			,m_canCollide(false)
 			,m_state(EntityState::NORMAL)
+			, m_width(0)
+			, m_height(0)
+		
 		{}
 
 		void Entity::Update(double deltaTime)
@@ -86,7 +89,58 @@ namespace Asteroids
 
 			GameObject::Render();
 		}
-		bool Entity::IsColliding(Entity * rhs) 
+		bool Entity::IsColliding(Entity * rhs)
+		{
+			Engine::Components::componenteDeTransformacion* t_rhs =
+				rhs->GetComponent<Engine::Components::componenteDeTransformacion>();
+			bool intersectos=false;
+
+			if (!rhs)
+				return false;
+			if (!t_rhs)
+				return false;
+
+			if (t_rhs->GetPosition().m_x + t_rhs->GetPosition().m_width < GetPosition().m_x) {
+				return intersectos;
+			}
+
+			if (GetPosition().m_x + GetPosition().m_width < t_rhs->GetPosition().m_x) {
+				return intersectos;
+			}
+
+			if (t_rhs->GetPosition().m_x > GetPosition().m_x + m_width) {
+				return intersectos;
+			}
+
+			if (GetPosition().m_x > t_rhs->GetPosition().m_x + t_rhs->GetPosition().m_width) {
+				return intersectos;
+			}
+
+			if (t_rhs->GetPosition().m_y + t_rhs->GetPosition().m_height < GetPosition().m_y) {
+				return intersectos;
+			}
+
+			if (GetPosition().m_y + GetPosition().m_height < t_rhs->GetPosition().m_y) {
+				return intersectos;
+			}
+
+			if (t_rhs->GetPosition().m_y > GetPosition().m_y + m_height) {
+				return intersectos;
+			}
+
+			if (GetPosition().m_y > t_rhs->GetPosition().m_y + t_rhs->GetPosition().m_height) {
+				return intersectos;
+			}
+
+			return intersectos=true;
+
+			if (intersectos)
+			{
+				m_state = EntityState::COLLIDED;
+				return intersectos;
+			}
+		}
+		/*bool Entity::IsColliding(Entity * rhs) 
 		{
 			Engine::Components::componenteDeTransformacion* t_rhs =
 				rhs->GetComponent<Engine::Components::componenteDeTransformacion>();
@@ -103,11 +157,12 @@ namespace Asteroids
 			float distSquared = x * x + y * y;
 
 	        bool intersectos = radii * radii >= distSquared;
+
 			if (intersectos)
 			{
 				m_state = EntityState::COLLIDED;
 				return intersectos;
 			}
-		}
+		}*/
 	}
 }

@@ -29,9 +29,9 @@ namespace Asteroids
 			m_height
 		);
 		CreatePlayer();
-		CreateAsteroids(10, Entities::Asteroid::AsteroidSize::BIG);
+		CreateAsteroids(25, Entities::Asteroid::AsteroidSize::BIG);
 	}
-
+	
 	void Game::Update(double deltaTime)
 	{
 		HandleInput();
@@ -51,12 +51,10 @@ namespace Asteroids
 		{
 			m_player->MoveUp();
 		}
-
 		if (Engine::Input::InputManager::Instance().IsKeyPressed('a'))
 		{
 			m_player->MoveLeft();
 		}
-
 		if (Engine::Input::InputManager::Instance().IsKeyPressed('d'))
 		{
 			m_player->MoveRight();
@@ -158,6 +156,7 @@ namespace Asteroids
 			}
 		}
 	}
+
 	void Game::deleteBullet(Entities::Bullets* bala)
 	{
 		m_scene->RemoveChild(bala);

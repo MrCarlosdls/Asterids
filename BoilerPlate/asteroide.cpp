@@ -28,6 +28,9 @@ namespace Asteroids
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			m_transforms->Teleport(position);
 
+			m_width = m_transforms->GetPosition().m_x;
+			m_height = m_transforms->GetPosition().m_y;
+
 			
 			AttachComponent(m_transforms);
 
