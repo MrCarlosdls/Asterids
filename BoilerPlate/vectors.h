@@ -15,6 +15,8 @@ namespace Engine
 			float Length() const;
 			float SquaredLength() const;
 			float Vectors::Normalize();
+			float Vectors::GetX();
+			float Vectors::GetY();
 
 			static Vectors Origin;
 

@@ -5,6 +5,7 @@
 #include "componenteDeTransformacion.h"
 #include "mathUtilities.h"
 #include "escena.h"
+#include "AABB.h"
 
 namespace Asteroids
 {
@@ -27,12 +28,8 @@ namespace Asteroids
 		
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			m_transforms->Teleport(position);
-
-			m_width = m_transforms->GetPosition().m_x;
-			m_height = m_transforms->GetPosition().m_y;
-
+			m_collision = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, m_radius, m_radius);
 			
-			AttachComponent(m_transforms);
 
 			m_physics = new Engine::Components::componenteRigido(
 				Engine::Math::Vectors(0.0f), 
@@ -40,8 +37,10 @@ namespace Asteroids
 				1.0f,
 				1.0f 
 			);
-
 			AttachComponent(m_physics);
+			AttachComponent(m_transforms);
+
+			
 			Generate();
 
 			ApplyRandomImpulse();

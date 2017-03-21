@@ -14,6 +14,7 @@ namespace Asteroids
 		const int RESTART_BLINK_FRAME_TIME = 30;
 		const int RESPAWN_TIME = 120;
 		const float BULLET_SPEED = 250;
+		
 
 		Ship::Ship(const std::vector<points_set> points)
 			: m_ships(points)
@@ -25,12 +26,12 @@ namespace Asteroids
 			, m_currentColor(Engine::Math::Vectors1(1.0f))
 		{
 			m_radius = 10;
-			m_width = m_transforms->GetPosition().m_x;
-			m_height = m_transforms->GetPosition().m_y;
+			
 
 			m_transforms = new Engine::Components::componenteDeTransformacion();
+			
 
-			AttachComponent(m_transforms);
+			
 
 			    m_physics = new Engine::Components::componenteRigido(
 				Engine::Math::Vectors(0.0f),
@@ -38,8 +39,13 @@ namespace Asteroids
 				1.0f,
 				0.999f
 			);
+				m_collision = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, 30, 40);
+
+				
+				CalculateMass();
+			AttachComponent(m_transforms);
 			AttachComponent(m_physics);
-			CalculateMass();
+			
 		}
 
 		Ship::~Ship()

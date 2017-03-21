@@ -22,8 +22,7 @@ namespace Asteroids
 			
 
 			m_radius = 1.0f;
-			m_width = m_transforms->GetPosition().m_x;
-			m_height = m_transforms->GetPosition().m_y;
+			
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			m_transforms->Teleport(position);
 			AttachComponent(m_transforms);

@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "componenteDeTransformacion.h"
 #include "cuerpoRigido.h"
+#include "AABB.h"
 
 namespace Asteroids
 {
@@ -39,11 +40,10 @@ namespace Asteroids
 			EntityState::State m_state;
 			Engine::Components::componenteDeTransformacion* m_transforms;
 			Engine::Components::componenteRigido* m_physics;
+			AABB* m_collision;
 			float m_radius; 
 			bool m_canCollide;
-			float m_width;
-			float m_height;
-
+			
 		private:
 			float m_halfWidth;
 			float m_halfHeight;

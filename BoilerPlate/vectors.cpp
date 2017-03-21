@@ -32,16 +32,16 @@ namespace Engine
 			Length();
 		}
 		
-	/*	const float Vectors::GetX()
+		 float Vectors::GetX()
 		{
 			return m_x;
 		}
 
-		const float Vectors::GetY()
+		 float Vectors::GetY()
 		{
 			return m_y;
 		}
-		*/
+		
 
 		float Vectors::Length() const
 		{

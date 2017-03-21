@@ -70,6 +70,7 @@ namespace Engine
 			{
 				(*child)->Render();
 			}
+
 		}
 	}
 }
