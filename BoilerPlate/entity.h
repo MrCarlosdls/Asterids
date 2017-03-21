@@ -19,7 +19,6 @@ namespace Asteroids
 				enum State
 				{
 					NORMAL = 0, COLLIDED=1, DELETED=2, RESPAWNING=3
-			
 				};
 
 			};
@@ -40,9 +39,9 @@ namespace Asteroids
 			EntityState::State m_state;
 			Engine::Components::componenteDeTransformacion* m_transforms;
 			Engine::Components::componenteRigido* m_physics;
-			AABB* m_collision;
 			float m_radius; 
 			bool m_canCollide;
+			AABB* Test;
 			
 		private:
 			float m_halfWidth;

@@ -1,5 +1,6 @@
 #include "AABB.h"
 
+//CTOR
 AABB::AABB()
 {
 	m_x = 0;
@@ -12,10 +13,10 @@ AABB::AABB(int x, int y, int width, int heigth)
 	:m_x(x), m_y(y), m_width(width), m_height(heigth)
 {}
 
-bool AABB::isIntersecting(AABB * rhs)
+bool AABB::isIntersecting(AABB * square)
 {
-	return (GetMinX() < rhs->GetMaxX() && GetMaxX()> rhs->GetMinX() &&
-		GetMinY() < rhs->GetMaxY() && GetMaxY() > rhs->GetMinY());
+	return (GetMinX() < square->GetMaxX() && GetMaxX()> square->GetMinX()
+		&& GetMinY() < square->GetMaxY() && GetMaxY() > square->GetMinY());
 }
 
 int AABB::GetX()

@@ -61,7 +61,7 @@ namespace Asteroids
 
 			m_transforms->Teleport(x, y);
 
-			m_collision->Update(m_transforms->GetPosition().m_x,m_transforms->GetPosition().m_y);
+			Test->Update(m_transforms->GetPosition().m_x,m_transforms->GetPosition().m_y);
 
 			GameObject::Update(deltaTime);
 		}
@@ -72,14 +72,11 @@ namespace Asteroids
 			if (!transforms) return;
 
 			glLoadIdentity();
-
 			glTranslatef(transforms->GetPosition().m_x, transforms->GetPosition().m_y, 0.0f);
-
 			glRotatef(transforms->GetAngleInDegrees(), 0.0f, 0.0f, 1.0f);
-			
 			glColor3f(color.m_x, color.m_y, color.m_z);
-
 			glBegin(mode);
+
 			for (auto point : points)
 			{
 				glVertex2f(point.m_x, point.m_y);
@@ -89,10 +86,10 @@ namespace Asteroids
 			glLoadIdentity();
 			glBegin(mode);
 			glColor3f(color.m_x, color.m_y, color.m_z);
-			glVertex2f(m_collision->GetMinX(), m_collision->GetMinY());
-			glVertex2f(m_collision->GetMaxX(), m_collision->GetMinY());
-			glVertex2f(m_collision->GetMaxX(), m_collision->GetMaxY());
-			glVertex2f(m_collision->GetMinX(), m_collision->GetMaxY());
+			glVertex2f(Test->GetMinX(), Test->GetMinY());
+			glVertex2f(Test->GetMaxX(), Test->GetMinY());
+			glVertex2f(Test->GetMaxX(), Test->GetMaxY());
+			glVertex2f(Test->GetMinX(), Test->GetMaxY());
 			glEnd();
 
 			
@@ -103,7 +100,7 @@ namespace Asteroids
 		{
 			if (CanCollide())
 			{
-				return m_collision->isIntersecting(param->m_collision);
+				return Test->isIntersecting(param->Test);
 			}
 			return false;
 

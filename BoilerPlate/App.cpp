@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+//#include "irrKlang.h"
 #include "config.h"
 #include "manager.h" 
 
@@ -53,7 +54,7 @@ namespace Application
 		}
 
 		m_state = AppState::RUNNING;
-
+		//PlaySound(TEXT("text.wav"), NULL, SND_SYNC);
 		SDL_Event event;
 		while (m_state == AppState::RUNNING)
 		{
@@ -90,6 +91,8 @@ namespace Application
 		// Change game state
 		//
 		m_state = AppState::INIT_SUCCESSFUL;
+
+		//Addin sound
 
 		m_game->Init();
 

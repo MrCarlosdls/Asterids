@@ -11,26 +11,29 @@ namespace Asteroids
 {
 	namespace Entities
 	{
-		const int NUM_POINTS = 16;
+		const int NUM_POINTS = 20;
 		const float MIN_SIZE = 25.0f;
 		const float MAX_SIZE = 45.0f;
 		const float ROTATION_SPEED = 120.0f;
+		//const int AABB_WIDTH = 14;
+		//const int AABB_HEIGTH = 14;
 
 		Asteroid::Asteroid(AsteroidSize::Size size, Engine::Math::Vectors position)
 			: m_size(size)
 		{
-			if (size == AsteroidSize::BIG) m_radius = 40.f;
-			if (size == AsteroidSize::MEDIUM) m_radius = 20.f;
-			if (size == AsteroidSize::SMALL) m_radius = 10.f;
+			if (size == AsteroidSize::BIG)
+				m_radius = 40.f ;
+			if (size == AsteroidSize::MEDIUM)
+				m_radius = 20.f;
+			if (size == AsteroidSize::SMALL)
+				m_radius = 10.f;
 
 			m_sizeFactor = static_cast<int>(size) + 1;
 
-		
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			m_transforms->Teleport(position);
-			m_collision = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, m_radius, m_radius);
+			Test = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, m_radius, m_radius);
 			
-
 			m_physics = new Engine::Components::componenteRigido(
 				Engine::Math::Vectors(0.0f), 
 				m_transforms->GetPosition(),
@@ -75,8 +78,8 @@ namespace Asteroids
 
 		void Asteroid::ApplyRandomImpulse() const 
 		{
-			float x = Engine::Math::RandomInRange<float>(-150.0f, 150.0f);
-			float y = Engine::Math::RandomInRange<float>(-150.0f, 150.0f);
+			float x = Engine::Math::RandomInRange<float>(-200.0f, 100.0f);
+			float y = Engine::Math::RandomInRange<float>(-200.0f, 100.0f);
 
 			m_physics->ApplyForce(
 				Engine::Math::Vectors(x, y) + static_cast<int>(m_sizeFactor),

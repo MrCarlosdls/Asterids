@@ -19,17 +19,20 @@ namespace Asteroids
 		{
 			//Attached components of entity
 			
-			
-
 			m_radius = 1.0f;
 			
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			m_transforms->Teleport(position);
-			AttachComponent(m_transforms);
-
+			
 			m_physics = new Engine::Components::componenteRigido(Engine::Math::Vectors(0.0f), m_transforms->GetPosition());
+			
 			m_physics->ApplyForce(velocidad, Engine::Math::DegreesToRadians(angulo));
+			Test = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, 3, 3);
+			
+			AttachComponent(m_transforms);
 			AttachComponent(m_physics);
+			
+			
 
 		}
 			void Bullets::Update(double deltaTime)
@@ -48,7 +51,7 @@ namespace Asteroids
 			{
 				glLoadIdentity();
 
-				glPointSize(2.0f);
+				glPointSize(5.0f);
 
 				glEnable(GL_POINT_SMOOTH);
 

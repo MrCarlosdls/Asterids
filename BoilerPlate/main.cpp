@@ -6,11 +6,13 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+//#include <MMSystem.h>
 #include "fstream"
 #include "Source.h"
 #include "App.hpp"
 #include "windows.h"
 #include "leerModels.h"
+
  
 
 using namespace std;
@@ -36,6 +38,9 @@ int main(int argc, char* argv[])
 	//
 	Application::App* app = new Application::App("Boiler Plate!", WIDTH, HEIGHT);
 
+
+	//PlaySound("text.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
+
 	// Initialize game
 	//
 	if(!app->Init())
@@ -43,7 +48,7 @@ int main(int argc, char* argv[])
 		cout << "App Init error!\n";
 		return -1;
 	}
-
+	
 	// Execute game
 	//
 	app->Execute();

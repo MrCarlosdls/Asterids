@@ -15,7 +15,10 @@ namespace Asteroids
 		const int RESPAWN_TIME = 120;
 		const float BULLET_SPEED = 250;
 		
-
+		//AABB constant ints 
+		const int AABB_WIDTH = 40;
+		const int AABB_HEIGTH = 40;
+		
 		Ship::Ship(const std::vector<points_set> points)
 			: m_ships(points)
 			, m_currentIndex(0)
@@ -27,22 +30,18 @@ namespace Asteroids
 		{
 			m_radius = 10;
 			
-
 			m_transforms = new Engine::Components::componenteDeTransformacion();
 			
-
-			
-
 			    m_physics = new Engine::Components::componenteRigido(
 				Engine::Math::Vectors(0.0f),
 				m_transforms->GetPosition(),
 				1.0f,
 				0.999f
 			);
-				m_collision = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, 30, 40);
 
-				
-				CalculateMass();
+				Test = new AABB(m_transforms->GetPosition().m_x, m_transforms->GetPosition().m_y, AABB_WIDTH, AABB_HEIGTH);
+
+			CalculateMass();
 			AttachComponent(m_transforms);
 			AttachComponent(m_physics);
 			
@@ -58,7 +57,6 @@ namespace Asteroids
 			m_ships.clear();
 			//Entity::~Entity();
 		}
-
 
 		void Ship::MoveUp() const
 		{
